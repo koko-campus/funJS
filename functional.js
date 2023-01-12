@@ -68,13 +68,11 @@ const removeChildren = parent => (parent.firstChild) ? [parent.removeChild(paren
 const append = ([a, ...b], parent) => (a !== undefined) ? [parent.appendChild(a), ...append(b, parent)] : [];
 const mkBr = () => document.createElement("br");
 const appendText = ([a, ...b], parent) => (a !== undefined && 1 <= b.length) ? [append([document.createTextNode(a), mkBr()], parent), appendText(b, parent)] : (b.length === 0) ? append([document.createTextNode(a)], parent) : [];
-const push = ([a, ...b], list) => (a !== undefined) ? [list.push(a), ...push(b, list)] : [];
+const push = ([a, ...b], list) => (a !== undefined) ? [...push(b, list), list.push(a)] : [];
 
 const doNtimes = (n, fx, i = 0) => (i < n) ? [fx(i), ...doNtimes(n, fx, i + 1)] : [];
 
 const random = (a, b) => Math.floor(Math.random() * (b + 1 - a) + a);
-const round = n => i => Math.round(i * n) / n;
-const round100 = round(100);
 
 const NxN = (a, b, c = null) => [new Array(a).fill(new Array(b).fill(c))];
 const NxNfx = (a, b, fx) => [new Array(a).fill(new Array(b).fill(fx()))];
