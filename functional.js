@@ -50,9 +50,9 @@ const minFx = ([a, b, ...c], fx, eq = true) => (fst(c) !== undefined) ? minFx([(
 const maxFx = ([a, b, ...c], fx, eq = true) => (fst(c) !== undefined) ? maxFx([((eq) ? gtEq : gt)(fx(a), fx(b)) ? a : b, ...c], fx) : ((eq) ? gtEq : gt)(fx(a), fx(b)) ? a : b;
 const reducer = ([a, ...b], fx, fxComprehensive = add) => (a !== undefined && 0 < b.length) ? fxComprehensive(fx(a), reducer(b, fx, fxComprehensive)) : fx(a);
 
-const getElm = ([a, ...b]) => (a !== undefined) ? [document.getElementById(a), ...getElm(b)] : [];
-const mkElm = ([a, ...b]) => (a !== undefined) ? [document.createElement(a), ...mkElm(b)] : [];
-const mkElmSVG = ([a, ...b]) => (a !== undefined) ? [document.createElementNS(NAMESPACE_OF_SVG, a), ...mkElmSVG(b)] : [];
+const getElms = ([a, ...b]) => (a !== undefined) ? [document.getElementById(a), ...getElms(b)] : [];
+const mkElms = ([a, ...b]) => (a !== undefined) ? [document.createElement(a), ...mkElms(b)] : [];
+const mkElmSVGs = ([a, ...b]) => (a !== undefined) ? [document.createElementNS(NAMESPACE_OF_SVG, a), ...mkElmSVGs(b)] : [];
 const zFill = (n, len) => (Array(len).join("0") + n).slice(-len);
 const URLencodeAssoc = obj => Object.keys(obj).map(key => key + "=" + encodeURIComponent(obj[key])).join("&");
 const between = (a, b) => c => and(a <= c.length, c.length <= b);
