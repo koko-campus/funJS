@@ -1,24 +1,10 @@
-// funJS
-// 
-// "fun"ctional programming
-// and
-// programming with a lot of "fun"
-
-
 /* define const here */
-
 
 const mailRegex = `^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$`;
 const urlRegex = `^https?://[a-zA-Z\-\.]+\.\w+$`;
 const fqdnRegex = `^[a-zA-Z\-\.]+\.\w+$`;
-
 const NAMESPACE_OF_SVG = "http://www.w3.org/2000/svg";
 const SPACE = " ";
-
-
-
-
-
 
 /* define fx here */
 
@@ -99,4 +85,3 @@ const flatter = ([a, ...b]) => (a !== undefined) ? (Array.isArray(a)) ? [...flat
 const mixupMesh = (a, b, i = 0) =>  (i < a.length * b.length) ? [[a[Math.floor(i / b.length)], b[i % b.length]], ...mixupMesh(a, b, i + 1)] : [];
 
 const removeClassifiedItems = a => looper(Array.from(document.getElementsByClassName(a)), b => b.classList.remove(a));
-
