@@ -1,24 +1,10 @@
-// funJS
-// 
-// "fun"ctional programming
-// and
-// programming with a lot of "fun"
-
-
 /* define const here */
-
 
 const mailRegex = `^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$`;
 const urlRegex = `^https?://[a-zA-Z\-\.]+\.\w+$`;
 const fqdnRegex = `^[a-zA-Z\-\.]+\.\w+$`;
-
 const NAMESPACE_OF_SVG = "http://www.w3.org/2000/svg";
 const SPACE = " ";
-
-
-
-
-
 
 /* define fx here */
 
@@ -64,9 +50,9 @@ const minFx = ([a, b, ...c], fx, eq = true) => (fst(c) !== undefined) ? minFx([(
 const maxFx = ([a, b, ...c], fx, eq = true) => (fst(c) !== undefined) ? maxFx([((eq) ? gtEq : gt)(fx(a), fx(b)) ? a : b, ...c], fx) : ((eq) ? gtEq : gt)(fx(a), fx(b)) ? a : b;
 const reducer = ([a, ...b], fx, fxComprehensive = add) => (a !== undefined && 0 < b.length) ? fxComprehensive(fx(a), reducer(b, fx, fxComprehensive)) : fx(a);
 
-const getElm = ([a, ...b]) => (a !== undefined) ? [document.getElementById(a), ...getElm(b)] : [];
-const mkElm = ([a, ...b]) => (a !== undefined) ? [document.createElement(a), ...mkElm(b)] : [];
-const mkElmSVG = ([a, ...b]) => (a !== undefined) ? [document.createElementNS(NAMESPACE_OF_SVG, a), ...mkElmSVG(b)] : [];
+const getElms = ([a, ...b]) => (a !== undefined) ? [document.getElementById(a), ...getElms(b)] : [];
+const mkElms = ([a, ...b]) => (a !== undefined) ? [document.createElement(a), ...mkElms(b)] : [];
+const mkElmSVGs = ([a, ...b]) => (a !== undefined) ? [document.createElementNS(NAMESPACE_OF_SVG, a), ...mkElmSVGs(b)] : [];
 const zFill = (n, len) => (Array(len).join("0") + n).slice(-len);
 const URLencodeAssoc = obj => Object.keys(obj).map(key => key + "=" + encodeURIComponent(obj[key])).join("&");
 const between = (a, b) => c => and(a <= c.length, c.length <= b);
@@ -82,13 +68,11 @@ const removeChildren = parent => (parent.firstChild) ? [parent.removeChild(paren
 const append = ([a, ...b], parent) => (a !== undefined) ? [parent.appendChild(a), ...append(b, parent)] : [];
 const mkBr = () => document.createElement("br");
 const appendText = ([a, ...b], parent) => (a !== undefined && 1 <= b.length) ? [append([document.createTextNode(a), mkBr()], parent), appendText(b, parent)] : (b.length === 0) ? append([document.createTextNode(a)], parent) : [];
-const push = ([a, ...b], list) => (a !== undefined) ? [list.push(a), ...push(b, list)] : [];
+const push = ([a, ...b], list) => (a !== undefined) ? [...push(b, list), list.push(a)] : [];
 
 const doNtimes = (n, fx, i = 0) => (i < n) ? [fx(i), ...doNtimes(n, fx, i + 1)] : [];
 
 const random = (a, b) => Math.floor(Math.random() * (b + 1 - a) + a);
-const round = n => i => Math.round(i * n) / n;
-const round100 = round(100);
 
 const NxN = (a, b, c = null) => [new Array(a).fill(new Array(b).fill(c))];
 const NxNfx = (a, b, fx) => [new Array(a).fill(new Array(b).fill(fx()))];
@@ -99,4 +83,3 @@ const flatter = ([a, ...b]) => (a !== undefined) ? (Array.isArray(a)) ? [...flat
 const mixupMesh = (a, b, i = 0) =>  (i < a.length * b.length) ? [[a[Math.floor(i / b.length)], b[i % b.length]], ...mixupMesh(a, b, i + 1)] : [];
 
 const removeClassifiedItems = a => looper(Array.from(document.getElementsByClassName(a)), b => b.classList.remove(a));
-
